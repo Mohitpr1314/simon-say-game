@@ -7,33 +7,84 @@
     <style>
         body {
             text-align: center;
+            background: linear-gradient(to right, #FFDEE9, #B5FFFC);
+            color: #512D6D;
+            font-family: 'Arial', sans-serif;
         }
         .btn {
             height: 200px;
             width: 200px;
-            border: 10px solid black;
+            border: 8px solid #512D6D;
             border-radius: 20px;
             margin: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
         }
         .btn_container {
             display: flex;
             justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
-        .red { background-color: brown; }
-        .green { background-color: aquamarine; }
-        .yellow { background-color: chocolate; }
-        .purple { background-color: cornflowerblue; }
-        .flash { background-color: white; }
-        .userflash { background-color: green; }
+        .red { background-color: #FF6B6B; }
+        .green { background-color: #A8E6CF; }
+        .peach { background-color: #FFC3A0; }
+        .purple { background-color: #B39BC8; }
+        .flash { background-color: #FFFFFF; color: black; }
+        .userflash { background-color: #FFDD57; }
+        #restart-btn {
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        #restart-btn:hover {
+            background-color: #FF1493;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .btn {
+                height: 150px;
+                width: 150px;
+                font-size: 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            .btn {
+                height: 100px;
+                width: 100px;
+                font-size: 16px;
+            }
+            .btn_container {
+                flex-direction: column;
+                align-items: center;
+            }
+            #restart-btn {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>Simon Game</h1>
-    <h2>Press any key to start the Game</h2>
+    <h2>Click Restart to start the Game</h2>
+    <button id="restart-btn">Restart</button>
     <div class="btn_container">
         <div class="1">
             <div class="btn red" id="red">1</div>
-            <div class="btn yellow" id="yellow">2</div>
+            <div class="btn peach" id="peach">2</div>
         </div>
         <div class="2">
             <div class="btn green" id="green">3</div>
@@ -43,12 +94,12 @@
     <script>
         let gameSeq = [];
         let userSeq = [];
-        let btns = ["yellow", "red", "purple", "green"];
+        let btns = ["peach", "red", "purple", "green"];
         let h2 = document.querySelector("h2");
         let started = false;
         let level = 0;
         
-        document.addEventListener("keypress", function () {
+        document.getElementById("restart-btn").addEventListener("click", function () {
             if (!started) {
                 console.log('Game is started');
                 started = true;
@@ -84,9 +135,9 @@
                     setTimeout(levelUp, 1000);
                 }
             } else {
-                h2.innerHTML = `Game Over! Your score was <p>${level}</p> Press any key to start.`;
-                document.body.style.backgroundColor = "red";
-                setTimeout(() => document.body.style.backgroundColor = "white", 150);
+                h2.innerHTML = `Game Over! Your score was <p>${level}</p> Click Restart to play again.`;
+                document.body.style.backgroundColor = "#FF6B6B";
+                setTimeout(() => document.body.style.background = "linear-gradient(to right, #FFDEE9, #B5FFFC)", 150);
                 reset();
             }
         }
